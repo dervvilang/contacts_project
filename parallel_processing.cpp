@@ -24,9 +24,9 @@ void processSegment(const vector<string>& segment, unordered_map<wstring, vector
         if (!line.empty()) {
             wstring_convert<codecvt_utf8<wchar_t>> converter;
             wstring wline = converter.from_bytes(line);
-            wchar_t first_letter = wline[0]; // Первый символ строки
+            wchar_t first_letter = wline[0];
 
-            lock_guard<mutex> lock(file_mutex); // Блокировка доступа к общему ресурсу
+            lock_guard<mutex> lock(file_mutex);
             result[wstring(1, first_letter)].push_back(line);
         }
     }
@@ -74,7 +74,7 @@ int main() {
     }
     infile.close();
 
-    // Разделение данных на 4 сегмента
+    // Разделение данных на 4 части
     size_t total_lines = lines.size();
     size_t segment_size = (total_lines + 3) / 4; // Округление вверх
 
